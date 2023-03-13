@@ -6,9 +6,9 @@ def build(b):
     m = Model(name='pokemon_QCP')
 
     # by default they have a lower bound of 0 and an infinite upper bound
-    x1 = m.continuous_var(name='x1')
-    x2 = m.continuous_var(name='x2')
-    x3 = m.continuous_var(name='x3')
+    x1 = m.integer_var(name='x1')
+    x2 = m.integer_var(name='x2')
+    x3 = m.integer_var(name='x3')
 
     # (b1/x2) - x1 < 0
     # -x1x2 <= -b1 + .0001
