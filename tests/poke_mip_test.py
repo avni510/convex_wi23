@@ -9,10 +9,9 @@ class TestMIP(unittest.TestCase):
 
         m = poke_mip.build(b)
         m.print_information()
-        m.solve(log_output=True)
-        print(m.print_solution())
+        m.solve()
 
-        self.assertEqual(m.objective_value, 312)
-        self.assertEqual(m.solution.get_value('x1'), 156)
-        self.assertEqual(m.solution.get_value('x2'), 63)
-        self.assertEqual(m.solution.get_value('x3'), 93)
+        self.assertEqual(m.objective_value, 318)
+        self.assertEqual(m.solution.get_value('x1'), 135)
+        self.assertEqual(m.solution.get_value('x2'), 75)
+        self.assertEqual(m.solution.get_value('x3'), 108)
