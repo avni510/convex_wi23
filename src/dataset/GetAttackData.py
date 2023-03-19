@@ -46,8 +46,9 @@ DOWNNATURES = {
 # Continuous, simplified approximator for damage formula 
 #   (from attacker side, not defender - defender handled by an optimizer)
 # currently, calcs for STAB base 100 move (Pokemon note - this is roughly post-tera tera blast for pre-existing STAB)
-def calcDamage(stat, base_power=100):
-    return base_power*stat*2/5*1.5
+# adds 4/3 boost for tera
+def calcDamage(stat, base_power=100, tera=True):
+    return base_power*stat*2/5*1.5 * (4/3 if tera else 1)
 
 #takes base_stats as an array of 3 ints representing base stats for HP, Def, SpD, and calculates Beta Values
 def calc_betas(base_stats = [80, 80, 80], base_offense = [100, 100], base_pows=[100, 100], spread="Boost-Offense:0/252/0/252/0/0"): 
@@ -179,4 +180,4 @@ for attacker in attackers:
         betas = calc_betas(defense_stats[defender], attack_stats[attacker], attack_pows[attacker]) #uses default argument for spread for now
         df.loc[df.shape[0]] = betas + [attacker, defender]
 
-df.to_csv('dataset-draft-3.csv', index=False)
+df.to_csv('dataset-draft-4.csv', index=False)
