@@ -10,10 +10,6 @@ def build(b):
     x2 = m.integer_var(name='x2')
     x3 = m.integer_var(name='x3')
 
-    # (b1/x2) - x1 <= .0001
-    # -x1x2 <= -b1 + .0001
-    m.add(-x1 * x2 <= -b[0] + .0001)
-
     # x1 <= b1
     m.add_constraint(x1 <= b[0])
 
