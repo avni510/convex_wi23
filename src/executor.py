@@ -1,21 +1,24 @@
 from src import poke_mip
 import numpy as np
 
-def run(dataset):
+def run(bs, attackers, defenders):
     """
-    :param dataset numpy array
+    :param bs numpy array
+    :param attackers numpy array
+    :param defenders numpy array
     :return an array of dictionaries containing info of the solved optimization problem
     """
-
-    U = np.unique(dataset, axis = 0)
+    assert len(bs) == len(attackers) == len(defenders)
 
     results = []
-    for b in U:
+    for b, attacker, defender in zip(bs, attackers, defenders):
         info = {
                 "is_infeasible": None,
                 "objective_val": None,
                 "x": [],
-                "b": b
+                "b": b,
+                "attacker": attacker,
+                "defender": defender,
                 }
 
         m = poke_mip.build(b)
