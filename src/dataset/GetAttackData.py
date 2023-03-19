@@ -152,10 +152,9 @@ def get_attack_pows(pokemon):
 ### generate first dataset
 #################################
 
-attackers = ['flutter-mane', 'iron-bundle']
-# , 'iron-hands', 'great-tusk', 'gholdengo',
-# 'amoonguss', 'arcanine', 'dondozo', 'tatsugiri', 'dragonite', 'roaring-moon',
-# 'kingambit']
+attackers = ['flutter-mane', 'iron-bundle', 'iron-hands', 'great-tusk', 'gholdengo',
+'amoonguss', 'arcanine', 'dondozo', 'tatsugiri', 'dragonite', 'roaring-moon',
+'kingambit']
 # , 'maushold', 'brute-bonnet', 'talonflame', 'armarouge', 'indeedee-female', 
 # 'torkoal', 'tyranitar', 'palafin-hero', 'annihilape', 'iron-moth', 'sylveon', 
 # 'garganacl', 'murkrow', 'volcarona', 'gothitelle', 'mimikyu', 'baxcalibur', 
@@ -168,16 +167,32 @@ defenders = attackers #use same list for now
 
 df = pd.DataFrame(columns=['b1', 'b2', 'b3', 'b4', 'b5', 'attacker', 'defender'])
 
+defense_stats = {}
+attack_stats = {}
+attack_pows = {}
+## queries to API:
 progress = 0
-total_to_calc = len(attackers)*len(defenders)
+total_to_calc = len(attackers)
+for  attacker in attackers: 
+    attack_stats[attacker] = get_attack_stats(attacker)
+    attack_pows[attacker] = get_attack_pows(attacker)
+    progress += 1
+    print('progress: ' + str(progress) + ' / ' + str(total_to_calc))
+
+progress = 0
+total_to_calc = len(defenders)
+for  defender in defenders: 
+    defense_stats[defender] = get_defense_stats(defender)
+    progress += 1
+    print('progress: ' + str(progress) + ' / ' + str(total_to_calc))
+
+
 for attacker in attackers: 
     for defender in defenders: 
-        betas = calc_betas(get_defense_stats(defender), get_attack_stats(attacker), get_attack_pows(attacker)) #uses default argument for spread for now
+        betas = calc_betas(defense_stats[defender], attack_stats[attacker], attack_pows[attacker]) #uses default argument for spread for now
         df.loc[df.shape[0]] = betas + [attacker, defender]
-        progress += 1
-        print('progress: ' + str(progress) + ' / ' + str(total_to_calc))
 
-df.to_csv('dataset-draft-1.csv', index=False)
+df.to_csv('dataset-draft-2.csv', index=False)
         
 
     
