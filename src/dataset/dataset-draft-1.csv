@@ -1,5 +1,5 @@
 b1,b2,b3,b4,b5,attacker,defender
-9792.0,267,117,162,14490.0,charizard,snorlax
-9792.0,167,107,132,14490.0,charizard,raichu
-19440.0,267,117,162,10530.0,snorlax,snorlax
-19440.0,167,107,132,10530.0,snorlax,raichu
+162,107,187,5778.0,10659.0,flutter-mane,flutter-mane
+163,166,112,5778.0,10659.0,flutter-mane,iron-bundle
+162,107,187,6336.0,11616.0,iron-bundle,flutter-mane
+163,166,112,6336.0,11616.0,iron-bundle,iron-bundle

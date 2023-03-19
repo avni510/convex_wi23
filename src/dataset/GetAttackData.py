@@ -49,10 +49,10 @@ def calcDamage(stat, base_power=100):
 
 #takes base_stats as an array of 3 ints representing base stats for HP, Def, SpD, and calculates Beta Values
 def calc_betas(base_stats = [80, 80, 80], base_offense = [100, 100], base_pows=[100, 100], spread="Serious:0/252/0/252/0/0"): 
-    b2 = base_stats[0] + 75 + 32
-    b3 = base_stats[1] + 20 + 32
-    b4 = base_stats[2] + 20 + 32
-    b1 = calcDamage(calcStat(base_offense[0], spread, ATK), base_pows[0])
+    b1 = base_stats[0] + 75 + 32
+    b2 = base_stats[1] + 20 + 32
+    b3 = base_stats[2] + 20 + 32
+    b4 = calcDamage(calcStat(base_offense[0], spread, ATK), base_pows[0])
     b5 = calcDamage(calcStat(base_offense[1], spread, SPA), base_pows[1])
 
     return [b1, b2, b3, b4, b5]
@@ -152,15 +152,30 @@ def get_attack_pows(pokemon):
 ### generate first dataset
 #################################
 
-attackers = ['charizard', 'snorlax']
-defenders = ['snorlax', 'raichu']
+attackers = ['flutter-mane', 'iron-bundle']
+# , 'iron-hands', 'great-tusk', 'gholdengo',
+# 'amoonguss', 'arcanine', 'dondozo', 'tatsugiri', 'dragonite', 'roaring-moon',
+# 'kingambit']
+# , 'maushold', 'brute-bonnet', 'talonflame', 'armarouge', 'indeedee-female', 
+# 'torkoal', 'tyranitar', 'palafin-hero', 'annihilape', 'iron-moth', 'sylveon', 
+# 'garganacl', 'murkrow', 'volcarona', 'gothitelle', 'mimikyu', 'baxcalibur', 
+# 'glimmora', 'hatterene', 'pelipper', 'grimmsnarl', 'garchomp', 
+# 'ceruledge', 'scream-tail', 'meowscarada', 'gastrodon', 'sandy-shocks', 
+# 'oranguru', 'farigiraf', 'rotom-wash', 'hariyama', 'iron-jugulis', 
+# 'corviknight', 'lycanroc', 'abomasnow', 'pawmot', 'salamence', 'scizor', 
+# 'sableye', 'espathra', 'hydreigon', 'gyarados', 'tauros-paldea-aqua']
+defenders = attackers #use same list for now
 
 df = pd.DataFrame(columns=['b1', 'b2', 'b3', 'b4', 'b5', 'attacker', 'defender'])
 
+progress = 0
+total_to_calc = len(attackers)*len(defenders)
 for attacker in attackers: 
     for defender in defenders: 
         betas = calc_betas(get_defense_stats(defender), get_attack_stats(attacker), get_attack_pows(attacker)) #uses default argument for spread for now
         df.loc[df.shape[0]] = betas + [attacker, defender]
+        progress += 1
+        print('progress: ' + str(progress) + ' / ' + str(total_to_calc))
 
 df.to_csv('dataset-draft-1.csv', index=False)
         
