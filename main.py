@@ -7,7 +7,7 @@ from src import executor
 sys.path.append(os.getcwd())
 
 abs_path = os.path.abspath(os.getcwd())
-data = abs_path + "/src/dataset/dataset-draft-2.csv"
+data = abs_path + "/src/dataset/dataset-draft-3.csv"
 
 df = pd.read_csv(data)
 bs = df[["b1", "b2", "b3", "b4", "b5"]].to_numpy()
