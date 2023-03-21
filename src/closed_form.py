@@ -31,7 +31,7 @@ def build(b):
     #now account for upper bound of b1 #todo - check this doesn't break things
     x1_lb = max(b4/(b2), b5/b3, b1 - 32)
     if b1 < x1_lb: 
-        print('infeasible')
+        # print('infeasible')
         return -1, -1, -1, -1
     
     x1 = min(b1, x1)
@@ -43,14 +43,4 @@ def build(b):
 
 
     return x1 + x2 + x3, x1, x2, x3
-
-
-
-
-
-        
-        # if np.sqrt(b4 + b5) < b4/(b2 - 32):
-        #     candidate.append(b4/(b2-32))
-
-print(build([33, 33, 33, 300, 300]))
         

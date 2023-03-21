@@ -32,6 +32,6 @@ def build(b):
     for solution in possible_solutions: 
         if check_constraints(b, solution): 
             return sum(solution), solution[0], solution[1], solution[2]
-    print('infeasible')
+    # print('infeasible')
     return -1, -1, -1, -1
         
