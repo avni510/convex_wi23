@@ -4,10 +4,10 @@ import os
 
 from datetime import datetime
 
-DEFENDERS = ['flutter-mane', 'iron-bundle', 'iron-hands', 'great-tusk',
-       'gholdengo', 'amoonguss', 'arcanine', 'dondozo', 'tatsugiri',
-       'dragonite', 'roaring-moon', 'kingambit']
-DEFENDER_SOURCE_PATH = "src/dataset/dataset-draft-3.csv"
+DEFENDERS = ['bulbasaur', 'charmander', 'squirtle', 'pikachu', 'ninetales', 'jigglypuff', 'diglett', 'psyduck', 'abra',
+             'onix', 'drowzee']
+DEFENDER_SOURCE_PATH = "src/dataset/dataset_traditional_pokemon.csv"
+SUFFIX = 'traditional'
 
 sys.path.append(os.getcwd())
 abs_path = os.path.abspath(os.getcwd())
@@ -29,6 +29,8 @@ for d in DEFENDERS:
 
 df = pd.DataFrame(data)
 date_time = datetime.now().strftime("%m_%d_%H_%M_%S")
-save_path = f"src/dataset/generated_data_{date_time}.csv"
+SUFFIX = SUFFIX + '_' if SUFFIX else ''
+save_path = f"src/dataset/generated_data_{SUFFIX}{date_time}.csv"
+
 df.to_csv(save_path)
 print(f'data saved to {save_path}')
