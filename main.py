@@ -15,7 +15,7 @@ attackers = df["attacker"].to_numpy()
 defenders = df["defender"].to_numpy()
 results = executor.run(bs, attackers, defenders)
 
-f = Path(abs_path + "/results/results.pkl")
+f = Path(abs_path + "/results/results_generated_all_def.pkl")
 
 with open(f, 'wb') as outfile:
     dill.dump(results, outfile, protocol=dill.HIGHEST_PROTOCOL)

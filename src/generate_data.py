@@ -4,7 +4,9 @@ import os
 
 from datetime import datetime
 
-DEFENDERS = ["flutter-mane"]
+DEFENDERS = ['flutter-mane', 'iron-bundle', 'iron-hands', 'great-tusk',
+       'gholdengo', 'amoonguss', 'arcanine', 'dondozo', 'tatsugiri',
+       'dragonite', 'roaring-moon', 'kingambit']
 DEFENDER_SOURCE_PATH = "src/dataset/dataset-draft-3.csv"
 
 sys.path.append(os.getcwd())
@@ -15,8 +17,8 @@ stats_df = pd.read_csv(defender_stats_path)
 data = []
 for d in DEFENDERS:
     stats = stats_df[stats_df['defender'] == d].iloc[0]
-    for b4 in range(8000, 16000, 100):
-        for b5 in range(12000, 22000, 100):
+    for b4 in range(5000, 16000, 100):
+        for b5 in range(8000, 22000, 100):
             data.append({'b1': stats['b1'],
                          'b2': stats['b2'],
                          'b3': stats['b3'],
@@ -27,4 +29,6 @@ for d in DEFENDERS:
 
 df = pd.DataFrame(data)
 date_time = datetime.now().strftime("%m_%d_%H_%M_%S")
-df.to_csv(f"src/dataset/generated_data_{date_time}.csv")
+save_path = f"src/dataset/generated_data_{date_time}.csv"
+df.to_csv(save_path)
+print(f'data saved to {save_path}')
