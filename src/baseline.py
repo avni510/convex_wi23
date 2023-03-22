@@ -2,7 +2,7 @@ import numpy as np
 
 
 # based on https://www.vgcguide.com/eving-1-how-to-make-simple-ev-spreads
-# considers a small set of candidate spreads. We compare 
+# considers a small set of candidate spreads. We pick the smallest feasible one
 # 
 # "Go straight to HP and the defenses. Pick a defensive stat to put EVs in based on that Pokémon’s stats, and put EVs into Defense or Special Defense accordingly. 
 #  Split evenly or evenly-ish if you can’t decide.."
